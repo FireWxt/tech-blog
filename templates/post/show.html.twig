@@ -8,7 +8,9 @@
 
         <div class="post-content">
             {{ post.content|default('')|nl2br }}
-        </div>
+        
+
+        <img src =  {{ vich_uploader_asset(post, 'imageFile') }} alt="{{ post.title }}">
 
         <section class="post-comments">
             <h2>Comments</h2>

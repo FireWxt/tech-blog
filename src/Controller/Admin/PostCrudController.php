@@ -7,8 +7,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PostCrudController extends AbstractCrudController
 {
@@ -17,14 +19,20 @@ class PostCrudController extends AbstractCrudController
         return Post::class;
     }
 
-   public function configureFields(string $pageName): iterable
+public function configureFields(string $pageName): iterable
     {
+        $mappingsParams = $this->getParameter('vich_uploader.mappings');
+        $postsImagePath =  $mappingsParams['posts']['uri_prefix'];
+
+
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             TextEditorField::new('content'),
-            DateTimeField::new('createdAt')->hideOnForm(),
-            AssociationField::new('categories')->autocomplete(),
+            TextareaField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex(),
+            ImageField::new('imageName')->setBasePath($postsImagePath )->hideOnForm(),
+
+
         ];
-    }
+    } 
 }
