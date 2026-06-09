@@ -64,6 +64,12 @@ class Category
         return $this;
     }
 
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function removePost(Post $post): static
     {
         if ($this->posts->removeElement($post)) {
