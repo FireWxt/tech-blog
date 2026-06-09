@@ -19,6 +19,19 @@
         {% endif %}
     </head>
     <body>
+        <header>
+            <img src="{{ asset('images/logo-tech-trendz.png') }}" alt="Logo blog" width="200">
+            <nav>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">Home</a></li>
+                    <li><a href="{{ path('app_about') }}">About</a></li>
+                </ul>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
+    
+        <footer>
+            <p>  2025 TechBlog</p>
+        </footer>
     </body>
 </html>
