@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ category.name }}</h1>
+
+    <h2>Posts in this category</h2>
+    <ul>
+        {% for post in category.posts %}
+            <li>
+                <a href="{{ path('app_post', { id: post.id }) }}">{{ post.title }}</a>
+            </li>
+        {% else %}
+            <li>No post in this category.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
